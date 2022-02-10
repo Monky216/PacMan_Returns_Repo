@@ -64,7 +64,7 @@ public class PacMan : MonoBehaviour
 
         else if (direction == Vector2.down)
         {
-            transform.localRotation = Quaternion.Euler(0, 0, -90);
+            transform.localRotation = Quaternion.Euler(0, 0, 270);
         }
     }
 }
