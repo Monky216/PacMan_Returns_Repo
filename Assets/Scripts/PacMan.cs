@@ -5,7 +5,20 @@ using UnityEngine;
 public class PacMan : MonoBehaviour
 {
     public float speed;
+
     private Vector2 direction = Vector2.left;
+    private Nodes currentNode;
+    
+    void Start()
+    {
+        Nodes node = GetNodeAtPosition(transform.localPosition);
+
+        if (node != null)
+        {
+            currentNode = node;
+            Debug.Log(currentNode);
+        }
+    }
     
     void Update()
     {
@@ -66,5 +79,17 @@ public class PacMan : MonoBehaviour
         {
             transform.localRotation = Quaternion.Euler(0, 0, 270);
         }
+    }
+
+    Nodes GetNodeAtPosition (Vector2 pos)
+    {
+        GameObject tile = GameObject.Find("-- Game --").GetComponent<GameBoard>().board[(int)pos.x, (int)pos.y];
+
+        if (tile != null)
+        {
+            return tile.GetComponent<Nodes>();
+        }
+
+        return null;
     }
 }
