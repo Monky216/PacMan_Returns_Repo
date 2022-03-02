@@ -26,7 +26,7 @@ public class GameBoard : MonoBehaviour
 
             else
             {
-                Debug.Log("PacMan spotted at" + pos);
+                Debug.Log("PacMan spotted at " + pos);
             }
         }
     }
