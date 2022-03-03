@@ -21533,6 +21533,10 @@ PrefabInstance:
       propertyPath: speed
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 7560118283118190511, guid: 0d5d4540eaa072d4b8ecc64675e605df, type: 3}
+      propertyPath: idleSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5621ebb06458c664188f89cf8e78cfcf, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d5d4540eaa072d4b8ecc64675e605df, type: 3}
 --- !u!1001 &5215159897656055405

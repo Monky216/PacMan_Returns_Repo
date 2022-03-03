@@ -5,9 +5,11 @@ using UnityEngine;
 public class PacMan : MonoBehaviour
 {
     public float speed;
+    public Sprite idleSprite;
 
-    private Vector2 direction = Vector2.left;
-    private Node currentNode, moveToNode, targetNode;
+    private Vector2 direction = Vector2.zero;
+    private Vector2 nextDirection;
+    private Node currentNode, targetNode, previousNode;
     
     void Start()
     {
@@ -17,6 +19,9 @@ public class PacMan : MonoBehaviour
         {
             currentNode = node;
         }
+
+        direction = Vector2.left;
+        ChangePosition(direction);
     }
     
     void Update()
@@ -24,42 +29,92 @@ public class PacMan : MonoBehaviour
         //in order to use named methods, you must call them in a Unity preset method
         
         CheckInput();
-        //Move();
+        Move();
         UpdateOrientation();
+        UpdateAnimationState();
     }
 
     void CheckInput()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            direction = Vector2.left;
-            MoveToNode(direction);
+            ChangePosition(Vector2.left);
         }
 
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            direction = Vector2.up;
-            MoveToNode(direction);
+            ChangePosition(Vector2.up);
         }
 
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            direction = Vector2.right;
-            MoveToNode(direction);
+            ChangePosition(Vector2.right);
         }
 
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            direction = Vector2.down;
-            MoveToNode(direction);
+            ChangePosition(Vector2.down);
+        }
+    }
+
+    void ChangePosition(Vector2 d)
+    {
+        //check if the node selected is an option
+        if (d != direction)
+        {
+            nextDirection = d;
+        }
+
+        if (currentNode != null)
+        {
+            Node moveToNode = CanMove(d);
+
+            if (moveToNode != null)
+            {
+                //actively moving
+                direction = d;
+                targetNode = moveToNode;
+                previousNode = currentNode;
+                currentNode = null;
+            }
         }
     }
 
     void Move()
     {
-        //with a Vector2, both x and y will be multiplied by speed and time
-        //d is already a Vector2 of direction
-        transform.position += (Vector3)(direction * speed) * Time.deltaTime;
+        if (targetNode != currentNode && targetNode != null)
+        {
+            if (OverShotTarget())
+            {
+                //sets the game's boundaries
+                currentNode = targetNode;
+                transform.localPosition = currentNode.transform.position;
+                Node moveToNode = CanMove(nextDirection);
+                if (moveToNode != null)
+                {
+                    direction = nextDirection;
+                }
+                if (moveToNode == null)
+                {
+                    moveToNode = CanMove(direction);
+                }
+                if (moveToNode != null)
+                {
+                    targetNode = moveToNode;
+                    previousNode = currentNode;
+                    currentNode = null;
+                }
+                else
+                {
+                    //hits wall
+                    direction = Vector2.zero;
+                }
+            }
+            else
+            {
+                transform.position += (Vector3)(direction * speed) * Time.deltaTime;
+            }
+        }
     }
 
     void MoveToNode (Vector2 d)
@@ -96,6 +151,19 @@ public class PacMan : MonoBehaviour
         }
     }
 
+    void UpdateAnimationState()
+    {
+        if (direction == Vector2.zero)
+        {
+            GetComponent<Animator>().enabled = false;
+            GetComponent<SpriteRenderer> ().sprite = idleSprite;
+        }
+        else
+        {
+            GetComponent<Animator>().enabled = true;
+        }
+    }
+
     Node GetNodeAtPosition (Vector2 pos)
     {
         GameObject tile = GameObject.Find("-- Game --").GetComponent<GameBoard>().board[(int)pos.x, (int)pos.y];
@@ -121,5 +189,21 @@ public class PacMan : MonoBehaviour
             }
         }
         return moveToNode;
+    }
+
+    bool OverShotTarget()
+    {
+        float nodeToTarget = LengthFromNode(targetNode.transform.position);
+        float nodeToSelf = LengthFromNode(transform.localPosition);
+
+        //a true or false statement return
+            //if this statement is true, it'll return the values; else it does nothing
+        return nodeToSelf > nodeToTarget;
+    }
+
+    float LengthFromNode (Vector2 targetPosition)
+    {
+        Vector2 vec = targetPosition - (Vector2)previousNode.transform.position;
+        return vec.sqrMagnitude;
     }
 }
