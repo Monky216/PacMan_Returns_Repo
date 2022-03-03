@@ -84,6 +84,16 @@ public class PacMan : MonoBehaviour
     {
         if (targetNode != currentNode && targetNode != null)
         {
+            //turning around between nodes
+            if (nextDirection == direction * -1)
+            {
+                direction *= -1;
+
+                Node tempNode = targetNode;
+                targetNode = previousNode;
+                previousNode = tempNode;
+            }
+            
             if (OverShotTarget())
             {
                 //sets the game's boundaries
