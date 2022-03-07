@@ -23,7 +23,6 @@ public class GameBoard : MonoBehaviour
             {
                 board[(int)pos.x, (int)pos.y] = o;
             }
-
             else
             {
                 Debug.Log("PacMan spotted at " + pos);

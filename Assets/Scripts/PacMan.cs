@@ -27,7 +27,6 @@ public class PacMan : MonoBehaviour
     void Update()
     {
         //in order to use named methods, you must call them in a Unity preset method
-        
         CheckInput();
         Move();
         UpdateOrientation();
@@ -188,6 +187,8 @@ public class PacMan : MonoBehaviour
         GameObject c = GetTileAtPosition(transform.position);
         if (c != null)
         {
+            Debug.Log(c);
+            
             Tile tile = c.GetComponent<Tile>();
             if (tile != null)
             {
@@ -234,7 +235,7 @@ public class PacMan : MonoBehaviour
         int tileX = Mathf.RoundToInt(pos.x);
         int tileY = Mathf.RoundToInt(pos.y);
         GameObject tile = GameObject.Find("-- Game --").GetComponent<GameBoard>().board[tileX, tileY];
-        if (tile != null)
+        if (tile != null && tile.tag == "Pellet")
         {
             return tile;
         }
