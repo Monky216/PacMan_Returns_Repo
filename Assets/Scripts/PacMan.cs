@@ -32,6 +32,7 @@ public class PacMan : MonoBehaviour
         Move();
         UpdateOrientation();
         UpdateAnimationState();
+        ConsumePellet();
     }
 
     void CheckInput()
@@ -182,6 +183,25 @@ public class PacMan : MonoBehaviour
         }
     }
 
+    void ConsumePellet()
+    {
+        GameObject c = GetTileAtPosition(transform.position);
+        if (c != null)
+        {
+            Tile tile = c.GetComponent<Tile>();
+            if (tile != null)
+            {
+                //if didConsume is false and either isPellet or isSuperPellet is true
+                //parentheses work the same as in math
+                if (!tile.didConsume && (tile.isPellet || tile.isSuperPellet))
+                {
+                    c.GetComponent<SpriteRenderer>().enabled = false;
+                    tile.didConsume = true;
+                }
+            }
+        }
+    }
+
     Node GetNodeAtPosition (Vector2 pos)
     {
         GameObject tile = GameObject.Find("-- Game --").GetComponent<GameBoard>().board[(int)pos.x, (int)pos.y];
@@ -207,6 +227,18 @@ public class PacMan : MonoBehaviour
             }
         }
         return moveToNode;
+    }
+
+    GameObject GetTileAtPosition (Vector2 pos)
+    {
+        int tileX = Mathf.RoundToInt(pos.x);
+        int tileY = Mathf.RoundToInt(pos.y);
+        GameObject tile = GameObject.Find("-- Game --").GetComponent<GameBoard>().board[tileX, tileY];
+        if (tile != null)
+        {
+            return tile;
+        }
+        return null;
     }
 
     bool OverShotTarget()
