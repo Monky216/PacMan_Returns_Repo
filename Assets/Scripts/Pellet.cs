@@ -8,6 +8,8 @@ public class Pellet : MonoBehaviour
     private static int boardHeight = 36;
 
     public GameObject[,] board = new GameObject[boardWidth, boardHeight];
+    public int totalPellets = 0;
+    public int score = 0;
 
     void Start()
     {
@@ -20,6 +22,7 @@ public class Pellet : MonoBehaviour
             if (o.tag == "Pellet")
             {
                 board[(int)pos.x, (int)pos.y] = o;
+                totalPellets++;
             }
         }
     }

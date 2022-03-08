@@ -10,7 +10,8 @@ public class PacMan : MonoBehaviour
     private Vector2 direction = Vector2.zero;
     private Vector2 nextDirection;
     private Node currentNode, targetNode, previousNode;
-    
+    private int pelletsConsumed = 0;
+
     void Start()
     {
         Node node = GetNodeAtPosition(transform.localPosition);
@@ -31,7 +32,12 @@ public class PacMan : MonoBehaviour
         Move();
         UpdateOrientation();
         UpdateAnimationState();
+
+        //two pellets do not get consumed because of script delay
+        //decrease PacMan's speed and it will work
         ConsumePellet();
+
+        Debug.Log("SCORE: " + GameObject.Find("-- Game --").GetComponent<Pellet>().score);
     }
 
     void CheckInput()
@@ -196,6 +202,8 @@ public class PacMan : MonoBehaviour
                 {
                     c.GetComponent<SpriteRenderer>().enabled = false;
                     tile.didConsume = true;
+                    GameObject.Find("-- Game --").GetComponent<Pellet>().score += 1;
+                    pelletsConsumed++;
 
                     if(tile.name == "pellet (243)" || tile.name == "pellet (244)")
                     {
