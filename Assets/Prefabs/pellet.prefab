@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4335135663420279131}
   - component: {fileID: 1306930300322566908}
-  - component: {fileID: 1700045869904983266}
   m_Layer: 0
   m_Name: pellet
   m_TagString: Pellet
@@ -83,20 +82,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1700045869904983266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 912313747428846627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 363d0db3807a4e24fbce986844076aa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPortal: 0
-  isPellet: 1
-  isSuperPellet: 0
-  didConsume: 0
-  portalReceiver: {fileID: 0}

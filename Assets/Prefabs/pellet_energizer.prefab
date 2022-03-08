@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7289581183626107327}
   - component: {fileID: 1670559948801396014}
-  - component: {fileID: -5819711518316973738}
   m_Layer: 0
   m_Name: pellet_energizer
   m_TagString: Pellet
@@ -83,20 +82,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-5819711518316973738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665881414354660140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 363d0db3807a4e24fbce986844076aa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPortal: 0
-  isPellet: 0
-  isSuperPellet: 1
-  didConsume: 0
-  portalReceiver: {fileID: 0}
