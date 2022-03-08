@@ -187,8 +187,6 @@ public class PacMan : MonoBehaviour
         GameObject c = GetTileAtPosition(transform.position);
         if (c != null)
         {
-            Debug.Log(c);
-            
             Tile tile = c.GetComponent<Tile>();
             if (tile != null)
             {
@@ -198,6 +196,11 @@ public class PacMan : MonoBehaviour
                 {
                     c.GetComponent<SpriteRenderer>().enabled = false;
                     tile.didConsume = true;
+
+                    if(tile.name == "pellet (243)" || tile.name == "pellet (244)")
+                    {
+                        Debug.Log("triggered");
+                    }
                 }
             }
         }
@@ -234,8 +237,8 @@ public class PacMan : MonoBehaviour
     {
         int tileX = Mathf.RoundToInt(pos.x);
         int tileY = Mathf.RoundToInt(pos.y);
-        GameObject tile = GameObject.Find("-- Game --").GetComponent<GameBoard>().board[tileX, tileY];
-        if (tile != null && tile.tag == "Pellet")
+        GameObject tile = GameObject.Find("-- Game --").GetComponent<Pellet>().board[tileX, tileY];
+        if (tile != null)
         {
             return tile;
         }
@@ -248,7 +251,7 @@ public class PacMan : MonoBehaviour
         float nodeToSelf = LengthFromNode(transform.localPosition);
 
         //a true or false statement return
-            //if this statement is true, it'll return the values; else it does nothing
+        //if this statement is true, it'll return the values; else it does nothing
         return nodeToSelf > nodeToTarget;
     }
 
