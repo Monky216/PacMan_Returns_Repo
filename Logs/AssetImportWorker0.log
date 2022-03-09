@@ -445,3 +445,4 @@ Received Import Request.
 Start importing Assets/Scripts/Pellet.cs using Guid(6d5c3346bfa55ba46a964393dbe83e5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2952f45e69645e3265a638a21af921c') in 0.009644 seconds 
   Import took 0.013766 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
