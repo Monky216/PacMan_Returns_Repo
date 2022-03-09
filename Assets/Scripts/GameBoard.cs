@@ -23,6 +23,10 @@ public class GameBoard : MonoBehaviour
             {
                 board[(int)pos.x, (int)pos.y] = o;
             }
+            if (o.name == "PacMan")
+            {
+                Debug.Log("Found PacMan at " + pos);
+            }
         }
     }
 }
