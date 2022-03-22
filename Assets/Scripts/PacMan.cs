@@ -36,8 +36,6 @@ public class PacMan : MonoBehaviour
         //two pellets do not get consumed because of script delay
         //decrease PacMan's speed and it will work
         ConsumePellet();
-
-        Debug.Log("SCORE: " + GameObject.Find("-- Game --").GetComponent<Pellet>().score);
     }
 
     void CheckInput()

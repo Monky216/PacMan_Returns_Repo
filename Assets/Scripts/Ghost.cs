@@ -41,6 +41,10 @@ public class Ghost : MonoBehaviour
             currentNode = node;
         }
         previousNode = currentNode;
+        Vector2 pacManPosition = pacMan.transform.position;
+        Vector2 targetTile = new Vector2(Mathf.RoundToInt(pacManPosition.x), Mathf.RoundToInt(pacManPosition.y));
+        targetNode = GetNodeAtPosition(targetTile);
+        direction = Vector2.right;
     }
     
     void Update()
@@ -51,18 +55,29 @@ public class Ghost : MonoBehaviour
 
     void Move()
     {
+        //doesn't see other nodes, and once overtarget, teleports to targetTile
+        Debug.Log(currentNode);
+
+        //target is always node 44, as soon as it teleports, its error then jumps to node 44
+        Debug.Log(targetNode);
+
+        //previous is always node 33, as soon as it teleports, its error then jumps to node 33
+        Debug.Log(previousNode);
+
         if (targetNode != currentNode && targetNode != null)
         {
             if (OverShotTarget())
             {
                 currentNode = targetNode;
                 transform.position = currentNode.transform.position;
+                
                 GameObject otherPortal = GetPortal(currentNode.transform.position);
                 if (otherPortal != null)
                 {
                     transform.position = otherPortal.transform.position;
                     currentNode = otherPortal.GetComponent<Node>();
                 }
+
                 targetNode = ChooseNextNode();
                 previousNode = currentNode;
                 currentNode = null;
