@@ -40,47 +40,44 @@ public class Ghost : MonoBehaviour
         {
             currentNode = node;
         }
-        previousNode = currentNode;
+        previousNode = startingPosition;
         Vector2 pacManPosition = pacMan.transform.position;
         Vector2 targetTile = new Vector2(Mathf.RoundToInt(pacManPosition.x), Mathf.RoundToInt(pacManPosition.y));
-        targetNode = GetNodeAtPosition(targetTile);
+        targetNode = ChooseNextNode();
         direction = Vector2.right;
     }
     
     void Update()
     {
         ModeUpdate();
+        //no like
         Move();
     }
 
     void Move()
     {
-        //doesn't see other nodes, and once overtarget, teleports to targetTile
-        Debug.Log(currentNode);
-
-        //target is always node 44, as soon as it teleports, its error then jumps to node 44
-        Debug.Log(targetNode);
-
-        //previous is always node 33, as soon as it teleports, its error then jumps to node 33
-        Debug.Log(previousNode);
-
         if (targetNode != currentNode && targetNode != null)
         {
             if (OverShotTarget())
             {
                 currentNode = targetNode;
-                transform.position = currentNode.transform.position;
+                transform.localPosition = currentNode.transform.localPosition;
                 
-                GameObject otherPortal = GetPortal(currentNode.transform.position);
+                GameObject otherPortal = GetPortal(currentNode.transform.localPosition);
                 if (otherPortal != null)
                 {
-                    transform.position = otherPortal.transform.position;
+                    transform.localPosition = otherPortal.transform.localPosition;
                     currentNode = otherPortal.GetComponent<Node>();
                 }
 
+                //ChooseNextNode return is not working
+                //does not run past this point
                 targetNode = ChooseNextNode();
+                Debug.Log("target = " + targetNode);
                 previousNode = currentNode;
+                Debug.Log("previous = " + previousNode);
                 currentNode = null;
+                Debug.Log("current = " + currentNode);
             }
             else
             {
@@ -191,6 +188,7 @@ public class Ghost : MonoBehaviour
             float leastDistance = 69420f;
             for (int i = 0; i < foundNodes.Length; i++)
             {
+                //no like
                 float distance = GetDistance(foundNodes[i].transform.position, targetTile);
                 if (distance < leastDistance)
                 {
@@ -216,15 +214,20 @@ public class Ghost : MonoBehaviour
         return null;
     }
 
-    GameObject GetPortal (Vector2 pos)
+    GameObject GetPortal(Vector2 pos)
     {
-        GameObject tile = GameObject.Find("-- Game --").GetComponent<Tile>().portalReceiver;
+        //checks to see if node is portal
+        GameObject tile = GameObject.Find("-- Game --").GetComponent<GameBoard>().board[(int)pos.x, (int)pos.y];
+
         if (tile != null)
         {
-            if (tile.GetComponent<Tile>().isPortal)
+            if (tile.GetComponent<Tile>() != null)
             {
-                GameObject otherPortal = tile.GetComponent<Tile>().portalReceiver;
-                return otherPortal;
+                if (tile.GetComponent<Tile>().isPortal)
+                {
+                    GameObject otherPortal = tile.GetComponent<Tile>().portalReceiver;
+                    return otherPortal;
+                }
             }
         }
         return null;
@@ -232,13 +235,13 @@ public class Ghost : MonoBehaviour
 
     float LengthFromNode (Vector2 targetPosition)
     {
-        Vector2 vec = targetPosition - (Vector2)previousNode.transform.position;
+        Vector2 vec = targetPosition - (Vector2)previousNode.transform.localPosition;
         return vec.sqrMagnitude;
     }
 
     bool OverShotTarget()
     {
-        float nodeToTarget = LengthFromNode(targetNode.transform.position);
+        float nodeToTarget = LengthFromNode(targetNode.transform.localPosition);
         float nodeToSelf = LengthFromNode(transform.localPosition);
         return nodeToSelf > nodeToTarget;
     }

@@ -202,11 +202,6 @@ public class PacMan : MonoBehaviour
                     tile.didConsume = true;
                     GameObject.Find("-- Game --").GetComponent<Pellet>().score += 1;
                     pelletsConsumed++;
-
-                    if(tile.name == "pellet (243)" || tile.name == "pellet (244)")
-                    {
-                        Debug.Log("triggered");
-                    }
                 }
             }
         }
