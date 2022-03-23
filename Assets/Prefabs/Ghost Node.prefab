@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7547174821699941260}
   - component: {fileID: 4854682829998210211}
   - component: {fileID: 8643491034157146547}
+  - component: {fileID: -3848984645224189877}
   m_Layer: 0
   m_Name: Ghost Node
   m_TagString: Untagged
@@ -100,3 +101,17 @@ MonoBehaviour:
   isSuperPellet: 0
   didConsume: 0
   portalReceiver: {fileID: 0}
+--- !u!114 &-3848984645224189877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335747947512603740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e77171221441fb4d8e6c6fe14fcb006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neighbors: []
+  validDirections: []

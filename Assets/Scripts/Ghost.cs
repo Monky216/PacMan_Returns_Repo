@@ -50,7 +50,6 @@ public class Ghost : MonoBehaviour
     void Update()
     {
         ModeUpdate();
-        //no like
         Move();
     }
 
@@ -69,15 +68,9 @@ public class Ghost : MonoBehaviour
                     transform.localPosition = otherPortal.transform.localPosition;
                     currentNode = otherPortal.GetComponent<Node>();
                 }
-
-                //ChooseNextNode return is not working
-                //does not run past this point
                 targetNode = ChooseNextNode();
-                Debug.Log("target = " + targetNode);
                 previousNode = currentNode;
-                Debug.Log("previous = " + previousNode);
                 currentNode = null;
-                Debug.Log("current = " + currentNode);
             }
             else
             {
@@ -188,13 +181,15 @@ public class Ghost : MonoBehaviour
             float leastDistance = 69420f;
             for (int i = 0; i < foundNodes.Length; i++)
             {
-                //no like
-                float distance = GetDistance(foundNodes[i].transform.position, targetTile);
-                if (distance < leastDistance)
+                if (foundNodesDirection[i] != Vector2.zero)
                 {
-                    leastDistance = distance;
-                    moveToNode = foundNodes[i];
-                    direction = foundNodesDirection[i];
+                    float distance = GetDistance(foundNodes[i].transform.position, targetTile);
+                    if (distance < leastDistance)
+                    {
+                        leastDistance = distance;
+                        moveToNode = foundNodes[i];
+                        direction = foundNodesDirection[i];
+                    }
                 }
             }
         }
