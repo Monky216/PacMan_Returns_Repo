@@ -5,7 +5,13 @@ using UnityEngine;
 public class Ghost : MonoBehaviour
 {
     public float moveSpeed = 9.4f;
+
     public Node startingPosition;
+
+    public float ghostReleaseTimer = 0;
+    public int pinkyReleaseTimer = 5;
+
+    public bool isInGhostHouse = false;
 
     public int scatterModeTimer1 = 7;
     public int chaseModeTimer1 = 20;
@@ -44,6 +50,7 @@ public class Ghost : MonoBehaviour
         Vector2 pacManPosition = pacMan.transform.position;
         Vector2 targetTile = new Vector2(Mathf.RoundToInt(pacManPosition.x), Mathf.RoundToInt(pacManPosition.y));
         targetNode = ChooseNextNode();
+
         direction = Vector2.right;
     }
     
