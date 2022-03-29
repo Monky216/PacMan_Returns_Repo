@@ -7,11 +7,12 @@ public class Ghost : MonoBehaviour
     public float moveSpeed = 9.4f;
 
     public Node startingPosition;
+    public Node homeNode;
 
     public float ghostReleaseTimer = 0;
     public int pinkReleaseTimer = 5;
-    public int cyanReleaseTimer;
-    public int orangeReleaseTimer;
+    public int cyanReleaseTimer = 14;
+    public int orangeReleaseTimer = 21;
 
     public bool isInGhostHouse = false;
 
@@ -113,6 +114,7 @@ public class Ghost : MonoBehaviour
         if (currentMode != Mode.Frightened)
         {
             modeChangeTimer += Time.deltaTime;
+
             if (modeChangeIteration == 1)
             {
                 if (currentMode == Mode.Scatter && modeChangeTimer > scatterModeTimer1)
@@ -204,6 +206,16 @@ public class Ghost : MonoBehaviour
         return targetTile;
     }
 
+    Vector2 GetCyanGhostTargetTile()
+    {
+        return Vector2.zero;
+    }
+
+    Vector2 GetOrangeGhostTargetTile()
+    {
+        return Vector2.zero;
+    }
+
     Vector2 GetTargetTile()
     {
         Vector2 targetTile = Vector2.zero;
@@ -214,6 +226,14 @@ public class Ghost : MonoBehaviour
         else if (ghostType == GhostType.Pink)
         {
             targetTile = GetPinkGhostTargetTile();
+        }
+        else if (ghostTyoe == GhostType.Cyan)
+        {
+            targetTile = GetCyanGhostTargetTile();
+        }
+        else if (ghostType == GhostType.Orange)
+        {
+            targetTile = GetOrangeGhostTargetTile();
         }
         return targetTile;
     }
@@ -226,6 +246,22 @@ public class Ghost : MonoBehaviour
         }
     }
 
+    void ReleaseCyanGhost()
+    {
+        if (ghostType == GhostType.Cyan && isInGhostHouse)
+        {
+            isInGhostHouse = false;
+        }
+    }
+
+    void ReleaseOrangeGhost()
+    {
+        if (ghostType == GhostType.Orange && isInGhostHouse)
+        {
+            isInGhostHouse = false;
+        }
+    }
+
     void ReleaseGhosts()
     {
         ghostReleaseTimer += Time.deltaTime;
@@ -233,12 +269,27 @@ public class Ghost : MonoBehaviour
         {
             ReleasePinkGhost();
         }
+        if (ghostReleaseTimer > cyanReleaseTimer)
+        {
+            ReleaseCyanGhost();
+        }
+        if (ghostReleaseTimer > orangeReleaseTimer)
+        {
+            ReleaseOrangeGhost();
+        }
     }
 
     Node ChooseNextNode()
     {
-        targetTile = GetTargetTile();
-        
+        if (currentMode == Mode.Chase)
+        {
+            targetTile = GetTargetTile();
+        }
+        else if (currentMode == Mode.Scatter)
+        {
+            targetTile = homeNode.transform.position;
+        }
+
         Node moveToNode = null;
         Node[] foundNodes = new Node[4];
         Vector2[] foundNodesDirection = new Vector2[4];

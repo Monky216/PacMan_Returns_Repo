@@ -19,7 +19,7 @@ public class GameBoard : MonoBehaviour
         {
             Vector2 pos = o.transform.position;
 
-            if (o.name != "PacMan" && o.tag != "Pellet" && o.tag != "Ghost")
+            if (o.name != "PacMan" && o.tag != "Pellet" && o.tag != "Ghost" && o.tag != "GhostHome")
             {
                 board[(int)pos.x, (int)pos.y] = o;
             }
