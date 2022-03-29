@@ -9,17 +9,19 @@ public class Ghost : MonoBehaviour
     public Node startingPosition;
 
     public float ghostReleaseTimer = 0;
-    public int pinkyReleaseTimer = 5;
+    public int pinkReleaseTimer = 5;
+    public int cyanReleaseTimer;
+    public int orangeReleaseTimer;
 
     public bool isInGhostHouse = false;
 
-    public int scatterModeTimer1 = 7;
-    public int chaseModeTimer1 = 20;
-    public int scatterModeTimer2 = 7;
-    public int chaseModeTimer2 = 20;
-    public int scatterModeTimer3 = 5;
-    public int chaseModeTimer3 = 20;
-    public int scatterModeTimer4 = 5;
+    private int scatterModeTimer1 = 7;
+    private int chaseModeTimer1 = 20;
+    private int scatterModeTimer2 = 7;
+    private int chaseModeTimer2 = 20;
+    private int scatterModeTimer3 = 5;
+    private int chaseModeTimer3 = 20;
+    private int scatterModeTimer4 = 5;
 
     private int modeChangeIteration = 1;
     private float modeChangeTimer = 0f;
@@ -34,9 +36,21 @@ public class Ghost : MonoBehaviour
     Mode currentMode = Mode.Scatter;
     Mode previousMode;
 
+    public enum GhostType
+    {
+        Red,
+        Pink,
+        Cyan,
+        Orange
+    }
+
+    public GhostType ghostType;
+
     private GameObject pacMan;
     private Node currentNode, targetNode, previousNode;
     private Vector2 direction, nextDirection;
+
+    public Vector2 targetTile;
 
     void Start()
     {
@@ -46,23 +60,31 @@ public class Ghost : MonoBehaviour
         {
             currentNode = node;
         }
-        previousNode = startingPosition;
-        Vector2 pacManPosition = pacMan.transform.position;
-        Vector2 targetTile = new Vector2(Mathf.RoundToInt(pacManPosition.x), Mathf.RoundToInt(pacManPosition.y));
-        targetNode = ChooseNextNode();
 
-        direction = Vector2.right;
+        previousNode = startingPosition;
+
+        if (isInGhostHouse)
+        {
+            direction = Vector2.up;
+            targetNode = currentNode.neighbors[0];
+        }
+        else
+        {
+            direction = Vector2.left;
+            targetNode = ChooseNextNode();
+        }
     }
     
     void Update()
     {
         ModeUpdate();
         Move();
+        ReleaseGhosts();
     }
 
     void Move()
     {
-        if (targetNode != currentNode && targetNode != null)
+        if (targetNode != currentNode && targetNode != null && !isInGhostHouse)
         {
             if (OverShotTarget())
             {
@@ -160,15 +182,68 @@ public class Ghost : MonoBehaviour
         currentMode = m;
     }
     
-    Node ChooseNextNode()
+    Vector2 GetRedGhostTargetTile()
     {
-        Vector2 targetTile = Vector2.zero;
         Vector2 pacManPosition = pacMan.transform.position;
         targetTile = new Vector2(Mathf.RoundToInt(pacManPosition.x), Mathf.RoundToInt(pacManPosition.y));
+        
+        return targetTile;
+    }
+
+    Vector2 GetPinkGhostTargetTile()
+    {
+        Vector2 pacManPosition = pacMan.transform.position;
+        Vector2 pacManOrientation = pacMan.GetComponent<PacMan>().orientation;
+
+        int pacManPositionX = Mathf.RoundToInt(pacManPosition.x);
+        int pacManPositionY = Mathf.RoundToInt(pacManPosition.y);
+
+        Vector2 pacManTile = new Vector2(pacManPositionX, pacManPositionY);
+        Vector2 targetTile = pacManTile + (4 * pacManOrientation);
+
+        return targetTile;
+    }
+
+    Vector2 GetTargetTile()
+    {
+        Vector2 targetTile = Vector2.zero;
+        if (ghostType == GhostType.Red)
+        {
+            targetTile = GetRedGhostTargetTile();
+        }
+        else if (ghostType == GhostType.Pink)
+        {
+            targetTile = GetPinkGhostTargetTile();
+        }
+        return targetTile;
+    }
+
+    void ReleasePinkGhost()
+    {
+        if (ghostType == GhostType.Pink && isInGhostHouse)
+        {
+            isInGhostHouse = false;
+        }
+    }
+
+    void ReleaseGhosts()
+    {
+        ghostReleaseTimer += Time.deltaTime;
+        if (ghostReleaseTimer > pinkReleaseTimer)
+        {
+            ReleasePinkGhost();
+        }
+    }
+
+    Node ChooseNextNode()
+    {
+        targetTile = GetTargetTile();
+        
         Node moveToNode = null;
         Node[] foundNodes = new Node[4];
         Vector2[] foundNodesDirection = new Vector2[4];
         int nodeCounter = 0;
+
         for (int i = 0; i < currentNode.neighbors.Length; i++)
         {
             if (currentNode.validDirections [i] != direction * -1)

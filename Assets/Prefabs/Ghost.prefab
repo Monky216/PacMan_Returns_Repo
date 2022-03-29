@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1013255356747791463}
   m_Layer: 0
   m_Name: Ghost
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,10 +97,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 9.4
   startingPosition: {fileID: 0}
-  scatterModeTimer1: 7
-  chaseModeTimer1: 20
-  scatterModeTimer2: 7
-  chaseModeTimer2: 20
-  scatterModeTimer3: 5
-  chaseModeTimer3: 20
-  scatterModeTimer4: 5
+  ghostReleaseTimer: 0
+  pinkReleaseTimer: 5
+  cyanReleaseTimer: 0
+  orangeReleaseTimer: 0
+  isInGhostHouse: 0
+  ghostType: 0
+  targetTile: {x: 0, y: 0}
