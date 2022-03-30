@@ -9,10 +9,10 @@ public class Ghost : MonoBehaviour
     public Node startingPosition;
     public Node homeNode;
 
-    public float ghostReleaseTimer = 0;
-    public int pinkReleaseTimer = 5;
-    public int cyanReleaseTimer = 14;
-    public int orangeReleaseTimer = 21;
+    private float ghostReleaseTimer = 0;
+    private int pinkReleaseTimer = 5;
+    private int cyanReleaseTimer = 14;
+    private int orangeReleaseTimer = 21;
 
     public bool isInGhostHouse = false;
 
@@ -205,15 +205,53 @@ public class Ghost : MonoBehaviour
 
         return targetTile;
     }
-
+    
     Vector2 GetCyanGhostTargetTile()
     {
-        return Vector2.zero;
+        //pacMan info
+        Vector2 pacManPosition = pacMan.transform.localPosition;
+        Vector2 pacManOrientation = pacMan.GetComponent<PacMan>().orientation;
+
+        int pacManPositionX = Mathf.RoundToInt(pacManPosition.x);
+        int pacManPositionY = Mathf.RoundToInt(pacManPosition.y);
+
+        //setting targetTile ahead of pacMan by 2
+        Vector2 pacManTile = new Vector2(pacManPositionX, pacManPositionY);
+        Vector2 targetTile = pacManTile + (2 * pacManOrientation);
+
+        //temp Cyan position info
+        Vector2 tempCyanPosition = GameObject.Find("CyanGhost").transform.localPosition;
+        int cyanPositionX = Mathf.RoundToInt(tempCyanPosition.x);
+        int cyanPositionY = Mathf.RoundToInt(tempCyanPosition.y);
+
+        tempCyanPosition = new Vector2(cyanPositionX, cyanPositionY);
+
+        //finding distance between temp Cyan position and targetTile
+        float distance = GetDistance(tempCyanPosition, targetTile);
+        distance *= 2;
+
+        //setting targetTile as Cyan's location adding the distance found
+        targetTile = new Vector2(tempCyanPosition.x + distance, tempCyanPosition.y + distance);
+
+        return targetTile;
     }
 
     Vector2 GetOrangeGhostTargetTile()
     {
-        return Vector2.zero;
+        Vector2 pacManPosition = pacMan.transform.position;
+
+        float distance = GetDistance(transform.position, pacManPosition);
+        Vector2 targetTile = Vector2.zero;
+
+        if(distance > 8)
+        {
+            targetTile = new Vector2(Mathf.RoundToInt(pacManPosition.x), Mathf.RoundToInt(pacManPosition.y));
+        }
+        else if(distance < 8)
+        {
+            targetTile = homeNode.transform.position;
+        }
+        return targetTile;
     }
 
     Vector2 GetTargetTile()
@@ -227,7 +265,7 @@ public class Ghost : MonoBehaviour
         {
             targetTile = GetPinkGhostTargetTile();
         }
-        else if (ghostTyoe == GhostType.Cyan)
+        else if (ghostType == GhostType.Cyan)
         {
             targetTile = GetCyanGhostTargetTile();
         }
