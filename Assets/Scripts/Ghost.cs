@@ -219,19 +219,19 @@ public class Ghost : MonoBehaviour
         Vector2 pacManTile = new Vector2(pacManPositionX, pacManPositionY);
         Vector2 targetTile = pacManTile + (2 * pacManOrientation);
 
-        //temp Cyan position info
-        Vector2 tempCyanPosition = GameObject.Find("CyanGhost").transform.localPosition;
-        int cyanPositionX = Mathf.RoundToInt(tempCyanPosition.x);
-        int cyanPositionY = Mathf.RoundToInt(tempCyanPosition.y);
+        //temp Red position info
+        Vector2 tempRedPosition = GameObject.Find("RedGhost").transform.localPosition;
+        int redPositionX = Mathf.RoundToInt(tempRedPosition.x);
+        int redPositionY = Mathf.RoundToInt(tempRedPosition.y);
 
-        tempCyanPosition = new Vector2(cyanPositionX, cyanPositionY);
+        tempRedPosition = new Vector2(redPositionX, redPositionY);
 
         //finding distance between temp Cyan position and targetTile
-        float distance = GetDistance(tempCyanPosition, targetTile);
-        distance *= 2;
+        float distance = GetDistance(tempRedPosition, targetTile);
+        distance *= 1/2;
 
         //setting targetTile as Cyan's location adding the distance found
-        targetTile = new Vector2(tempCyanPosition.x + distance, tempCyanPosition.y + distance);
+        targetTile = new Vector2(tempRedPosition.x + distance, tempRedPosition.y + distance);
 
         return targetTile;
     }
