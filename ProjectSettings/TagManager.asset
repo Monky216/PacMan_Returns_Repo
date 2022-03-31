@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Pellet
+  - Ghost
+  - GhostHome
   layers:
   - Default
   - TransparentFX
