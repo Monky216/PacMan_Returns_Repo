@@ -96,7 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363d0db3807a4e24fbce986844076aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPortal: 0
+  isPortal: 1
+  isPellet: 0
+  isSuperPellet: 0
+  didConsume: 0
   portalReceiver: {fileID: 0}
 --- !u!114 &4686100430006229921
 MonoBehaviour:
