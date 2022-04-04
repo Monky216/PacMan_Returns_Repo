@@ -8,6 +8,9 @@ public class PacMan : MonoBehaviour
     public float speed;
     public Sprite idleSprite;
 
+    public AudioClip chomp1;
+    public AudioClip chomp2;
+
     private Vector2 direction = Vector2.zero;
     private Vector2 nextDirection;
 
@@ -15,8 +18,13 @@ public class PacMan : MonoBehaviour
 
     private int pelletsConsumed = 0;
 
+    private bool playedChomp1 = false;
+    private AudioSource audio;
+
     void Start()
     {
+        audio = transform.GetComponent<AudioSource>();
+        
         Node node = GetNodeAtPosition(transform.localPosition);
 
         if (node != null)
@@ -40,6 +48,20 @@ public class PacMan : MonoBehaviour
         //two pellets do not get consumed because of script delay
         //decrease PacMan's speed and it will work
         ConsumePellet();
+    }
+
+    void PlayChompSound()
+    {
+        if (playedChomp1)
+        {
+            audio.PlayOneShot(chomp2);
+            playedChomp1 = false;
+        }
+        else
+        {
+            audio.PlayOneShot(chomp1);
+            playedChomp1 = true;
+        }
     }
 
     void CheckInput()
@@ -210,6 +232,7 @@ public class PacMan : MonoBehaviour
                     tile.didConsume = true;
                     GameObject.Find("-- Game --").GetComponent<Pellet>().score += 1;
                     pelletsConsumed++;
+                    PlayChompSound();
                 }
             }
         }
