@@ -230,7 +230,7 @@ public class PacMan : MonoBehaviour
                 {
                     c.GetComponent<SpriteRenderer>().enabled = false;
                     tile.didConsume = true;
-                    GameObject.Find("-- Game --").GetComponent<Pellet>().score += 1;
+                    GameObject.Find("Game").GetComponent<Pellet>().score += 1;
                     pelletsConsumed++;
                     PlayChompSound();
                 }
@@ -240,7 +240,7 @@ public class PacMan : MonoBehaviour
 
     Node GetNodeAtPosition (Vector2 pos)
     {
-        GameObject tile = GameObject.Find("-- Game --").GetComponent<GameBoard>().board[(int)pos.x, (int)pos.y];
+        GameObject tile = GameObject.Find("Game").GetComponent<GameBoard>().board[(int)pos.x, (int)pos.y];
 
         if (tile != null)
         {
@@ -269,7 +269,7 @@ public class PacMan : MonoBehaviour
     {
         int tileX = Mathf.RoundToInt(pos.x);
         int tileY = Mathf.RoundToInt(pos.y);
-        GameObject tile = GameObject.Find("-- Game --").GetComponent<Pellet>().board[tileX, tileY];
+        GameObject tile = GameObject.Find("Game").GetComponent<Pellet>().board[tileX, tileY];
         if (tile != null)
         {
             return tile;
@@ -296,7 +296,7 @@ public class PacMan : MonoBehaviour
     GameObject GetPortal (Vector2 pos)
     {
         //checks to see if node is portal
-        GameObject tile = GameObject.Find("-- Game --").GetComponent<GameBoard>().board[(int)pos.x, (int)pos.y];
+        GameObject tile = GameObject.Find("Game").GetComponent<GameBoard>().board[(int)pos.x, (int)pos.y];
 
         if (tile != null)
         {

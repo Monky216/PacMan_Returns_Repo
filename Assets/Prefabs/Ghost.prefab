@@ -72,12 +72,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 21
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bbaa11f0b59647a49a81d090f6813e10, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -95,12 +95,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b9d8e5526bdd3428def582cbc1235b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 9.4
+  moveSpeed: 6.4
   startingPosition: {fileID: 0}
-  ghostReleaseTimer: 0
-  pinkReleaseTimer: 5
-  cyanReleaseTimer: 0
-  orangeReleaseTimer: 0
+  homeNode: {fileID: 0}
   isInGhostHouse: 0
+  ghostUp: {fileID: 0}
+  ghostDown: {fileID: 0}
+  ghostLeft: {fileID: 0}
+  ghostRight: {fileID: 0}
+  ghostFrightened: {fileID: 9100000, guid: 5f8790ef344ca6547baf76fcebcbac1a, type: 2}
+  ghostScared: {fileID: 9100000, guid: 84cf94b3cd7703547a28065a90217303, type: 2}
+  ghostEyesUp: {fileID: 21300000, guid: 96bb59b91801b2d44bcb15caee187197, type: 3}
+  ghostEyesDown: {fileID: 21300000, guid: 7579e9adedaba15488f58c06d2f9bcac, type: 3}
+  ghostEyesLeft: {fileID: 21300000, guid: 3ba457fca2f67474c90d62cfaa9b915d, type: 3}
+  ghostEyesRight: {fileID: 21300000, guid: d710a81fcb6d2c745a7d4a020199a273, type: 3}
   ghostType: 0
   targetTile: {x: 0, y: 0}

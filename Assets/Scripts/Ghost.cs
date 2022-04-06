@@ -28,6 +28,13 @@ public class Ghost : MonoBehaviour
     public RuntimeAnimatorController ghostDown;
     public RuntimeAnimatorController ghostLeft;
     public RuntimeAnimatorController ghostRight;
+    public RuntimeAnimatorController ghostFrightened;
+    public RuntimeAnimatorController ghostScared;
+
+    public Sprite ghostEyesUp;
+    public Sprite ghostEyesDown;
+    public Sprite ghostEyesLeft;
+    public Sprite ghostEyesRight;
 
     private int modeChangeIteration = 1;
     private float modeChangeTimer = 0f;
@@ -91,25 +98,32 @@ public class Ghost : MonoBehaviour
 
     void UpdateAnimatorController()
     {
-        if (direction == Vector2.up)
+        if(currentMode != Mode.Frightened)
         {
-            transform.GetComponent<Animator>().runtimeAnimatorController = ghostUp;
-        }
-        else if (direction == Vector2.right)
-        {
-            transform.GetComponent<Animator>().runtimeAnimatorController = ghostRight;
-        }
-        else if (direction == Vector2.down)
-        {
-            transform.GetComponent<Animator>().runtimeAnimatorController = ghostDown;
-        }
-        else if (direction == Vector2.left)
-        {
-            transform.GetComponent<Animator>().runtimeAnimatorController = ghostLeft;
+            if (direction == Vector2.up)
+            {
+                transform.GetComponent<Animator>().runtimeAnimatorController = ghostUp;
+            }
+            else if (direction == Vector2.right)
+            {
+                transform.GetComponent<Animator>().runtimeAnimatorController = ghostRight;
+            }
+            else if (direction == Vector2.down)
+            {
+                transform.GetComponent<Animator>().runtimeAnimatorController = ghostDown;
+            }
+            else if (direction == Vector2.left)
+            {
+                transform.GetComponent<Animator>().runtimeAnimatorController = ghostLeft;
+            }
+            else
+            {
+                transform.GetComponent<Animator>().runtimeAnimatorController = ghostLeft;
+            }
         }
         else
         {
-            transform.GetComponent<Animator>().runtimeAnimatorController = ghostLeft;
+            transform.GetComponent
         }
     }
 
@@ -400,7 +414,7 @@ public class Ghost : MonoBehaviour
 
     Node GetNodeAtPosition(Vector2 pos)
     {
-        GameObject tile = GameObject.Find("-- Game --").GetComponent<GameBoard>().board[(int)pos.x, (int)pos.y];
+        GameObject tile = GameObject.Find("Game").GetComponent<GameBoard>().board[(int)pos.x, (int)pos.y];
         if (tile != null)
         {
             if (tile.GetComponent<Node>() != null)
@@ -414,7 +428,7 @@ public class Ghost : MonoBehaviour
     GameObject GetPortal(Vector2 pos)
     {
         //checks to see if node is portal
-        GameObject tile = GameObject.Find("-- Game --").GetComponent<GameBoard>().board[(int)pos.x, (int)pos.y];
+        GameObject tile = GameObject.Find("Game").GetComponent<GameBoard>().board[(int)pos.x, (int)pos.y];
 
         if (tile != null)
         {
