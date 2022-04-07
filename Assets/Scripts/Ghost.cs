@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Ghost : MonoBehaviour
 {
-    public float moveSpeed = 9.4f;
+    public float moveSpeed = 6.4f;
+    public float previousMoveSpeed = 0f;
+    public float frightenedModeMoveSpeed = 3.2f;
 
     public Node startingPosition;
     public Node homeNode;
@@ -123,7 +125,7 @@ public class Ghost : MonoBehaviour
         }
         else
         {
-            transform.GetComponent
+            transform.GetComponent<Animator>().runtimeAnimatorController = ghostScared;
         }
     }
 
@@ -227,6 +229,21 @@ public class Ghost : MonoBehaviour
     void ChangeMode(Mode m)
     {
         currentMode = m;
+        if (currentMode == Mode.Frightened)
+        {
+            moveSpeed = previousMoveSpeed;
+        }
+        if(m == Mode.Frightened)
+        {
+            previousMoveSpeed = moveSpeed;
+            moveSpeed = frightenedModeMoveSpeed;
+        }
+        UpdateAnimatorController();
+    }
+
+    public void StartFrightenedMode()
+    {
+        ChangeMode(Mode.Frightened);
     }
     
     Vector2 GetRedGhostTargetTile()

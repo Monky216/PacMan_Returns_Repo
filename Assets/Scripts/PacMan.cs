@@ -233,6 +233,15 @@ public class PacMan : MonoBehaviour
                     GameObject.Find("Game").GetComponent<Pellet>().score += 1;
                     pelletsConsumed++;
                     PlayChompSound();
+
+                    if (tile.isSuperPellet)
+                    {
+                        GameObject[] ghost = GameObject.FindGameObjectsWithTag("Ghost");
+                        foreach (GameObject go in ghost)
+                        {
+                            go.GetComponent<Ghost>().StartFrightenedMode();
+                        }
+                    }
                 }
             }
         }
