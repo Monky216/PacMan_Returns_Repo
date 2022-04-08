@@ -6747,12 +6747,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: moveSpeed
-      value: 6.4
+      value: 6.8
       objectReference: {fileID: 0}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: ghostRight
       value: 
       objectReference: {fileID: 9100000, guid: ab4dc8be4356e594f9b79b358704ab7f, type: 2}
+    - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
+      propertyPath: startBlinking
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: isInGhostHouse
       value: 1
@@ -6762,8 +6766,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1620286908}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
+      propertyPath: frightenedModeDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: frightenedModeMoveSpeed
-      value: 3.2
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 4113691695229603592, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: m_RootOrder
@@ -12465,9 +12473,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1574870660}
     m_Modifications:
+    - target: {fileID: -6528964867397106722, guid: ce9dcaeb82d101f4a9a456d36d5f59d1, type: 3}
+      propertyPath: ghostHouseEntrance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2116871008951999476, guid: ce9dcaeb82d101f4a9a456d36d5f59d1, type: 3}
       propertyPath: neighbors.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2116871008951999476, guid: ce9dcaeb82d101f4a9a456d36d5f59d1, type: 3}
       propertyPath: neighbors.Array.data[0]
@@ -12481,6 +12493,10 @@ PrefabInstance:
       propertyPath: neighbors.Array.data[2]
       value: 
       objectReference: {fileID: 1286199521}
+    - target: {fileID: 2116871008951999476, guid: ce9dcaeb82d101f4a9a456d36d5f59d1, type: 3}
+      propertyPath: neighbors.Array.data[3]
+      value: 
+      objectReference: {fileID: 1620286908}
     - target: {fileID: 3905835872915931209, guid: ce9dcaeb82d101f4a9a456d36d5f59d1, type: 3}
       propertyPath: m_RootOrder
       value: 23
@@ -14367,9 +14383,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1574870660}
     m_Modifications:
+    - target: {fileID: -6528964867397106722, guid: ce9dcaeb82d101f4a9a456d36d5f59d1, type: 3}
+      propertyPath: ghostHouseEntrance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2116871008951999476, guid: ce9dcaeb82d101f4a9a456d36d5f59d1, type: 3}
       propertyPath: neighbors.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2116871008951999476, guid: ce9dcaeb82d101f4a9a456d36d5f59d1, type: 3}
       propertyPath: neighbors.Array.data[0]
@@ -14383,6 +14403,10 @@ PrefabInstance:
       propertyPath: neighbors.Array.data[2]
       value: 
       objectReference: {fileID: 1692168364}
+    - target: {fileID: 2116871008951999476, guid: ce9dcaeb82d101f4a9a456d36d5f59d1, type: 3}
+      propertyPath: neighbors.Array.data[3]
+      value: 
+      objectReference: {fileID: 1782035484}
     - target: {fileID: 3905835872915931209, guid: ce9dcaeb82d101f4a9a456d36d5f59d1, type: 3}
       propertyPath: m_RootOrder
       value: 24
@@ -16124,12 +16148,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: moveSpeed
-      value: 6.4
+      value: 6.8
       objectReference: {fileID: 0}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: ghostRight
       value: 
       objectReference: {fileID: 9100000, guid: 5159fed7c5763984fb9e0538a2407eed, type: 2}
+    - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
+      propertyPath: startBlinking
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: isInGhostHouse
       value: 1
@@ -16139,8 +16167,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1620286908}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
+      propertyPath: frightenedModeDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: frightenedModeMoveSpeed
-      value: 3.2
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 4113691695229603592, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: m_RootOrder
@@ -18989,12 +19021,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: moveSpeed
-      value: 6.4
+      value: 6.8
       objectReference: {fileID: 0}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: ghostRight
       value: 
       objectReference: {fileID: 9100000, guid: e99851af48b291044bb6dc78bb457885, type: 2}
+    - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
+      propertyPath: startBlinking
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: isInGhostHouse
       value: 1
@@ -19004,8 +19040,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1782035484}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
+      propertyPath: frightenedModeDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: frightenedModeMoveSpeed
-      value: 3.2
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 4113691695229603592, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: m_RootOrder
@@ -22965,19 +23005,27 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: ae0dbda5d3207d1439fdf53556561f58, type: 2}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: moveSpeed
-      value: 6.4
+      value: 6.8
       objectReference: {fileID: 0}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: ghostRight
       value: 
       objectReference: {fileID: 9100000, guid: 1203e92d2f688db44ab4994dbab2bcff, type: 2}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
+      propertyPath: startBlinking
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: startingPosition
       value: 
       objectReference: {fileID: 1269211758}
     - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
+      propertyPath: frightenedModeDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -1013255356747791463, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: frightenedModeMoveSpeed
-      value: 3.2
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 4113691695229603592, guid: 586fa719dad5c514490bd8a029ca71ba, type: 3}
       propertyPath: m_RootOrder
@@ -23146,7 +23194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7560118283118190511, guid: 0d5d4540eaa072d4b8ecc64675e605df, type: 3}
       propertyPath: speed
-      value: 6.5
+      value: 6.9
       objectReference: {fileID: 0}
     - target: {fileID: 7560118283118190511, guid: 0d5d4540eaa072d4b8ecc64675e605df, type: 3}
       propertyPath: chomp1

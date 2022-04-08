@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Ghost : MonoBehaviour
 {
-    public float moveSpeed = 6.4f;
+    public float moveSpeed = 0f;
     public float previousMoveSpeed = 0f;
-    public float frightenedModeMoveSpeed = 3.2f;
+    public float frightenedModeMoveSpeed = 0f;
 
     public Node startingPosition;
     public Node homeNode;
@@ -16,7 +16,13 @@ public class Ghost : MonoBehaviour
     private int cyanReleaseTimer = 14;
     private int orangeReleaseTimer = 21;
 
+    public int frightenedModeDuration;
+    public int startBlinking;
+    private float frightenedModeTimer = 0;
+    private float blinkingTimer = 0;
+
     public bool isInGhostHouse = false;
+    private bool frightenedModeIsBlinking = false;
 
     private int scatterModeTimer1 = 7;
     private int chaseModeTimer1 = 20;
@@ -96,6 +102,17 @@ public class Ghost : MonoBehaviour
         ModeUpdate();
         Move();
         ReleaseGhosts();
+        CheckCollision();
+    }
+
+    void CheckCollision()
+    {
+        Rect ghostRect = new Rect(transform.position, transform.GetComponent<SpriteRenderer>().sprite.bounds.size / 4);
+        Rect pacManRect = new Rect(pacMan.transform.position, pacMan.transform.GetComponent<SpriteRenderer>().sprite.bounds.size / 4);
+        if (ghostRect.Overlaps(pacManRect))
+        {
+            Debug.Log("GAME OVER");
+        }
     }
 
     void UpdateAnimatorController()
@@ -222,13 +239,35 @@ public class Ghost : MonoBehaviour
         }
         else if (currentMode == Mode.Frightened)
         {
-
+            frightenedModeTimer += Time.deltaTime;
+            if(frightenedModeTimer >= frightenedModeDuration)
+            {
+                frightenedModeTimer = 0;
+                ChangeMode(previousMode);
+            }
+            if(frightenedModeTimer >= startBlinking)
+            {
+                blinkingTimer += Time.deltaTime;
+                if(blinkingTimer >= 0.22f)
+                {
+                    blinkingTimer = 0f;
+                    if (frightenedModeIsBlinking)
+                    {
+                        transform.GetComponent<Animator>().runtimeAnimatorController = ghostScared;
+                        frightenedModeIsBlinking = false;
+                    }
+                    else
+                    {
+                        transform.GetComponent<Animator>().runtimeAnimatorController = ghostFrightened;
+                        frightenedModeIsBlinking = true;
+                    }
+                }
+            }
         }
     }
     
     void ChangeMode(Mode m)
     {
-        currentMode = m;
         if (currentMode == Mode.Frightened)
         {
             moveSpeed = previousMoveSpeed;
@@ -238,11 +277,17 @@ public class Ghost : MonoBehaviour
             previousMoveSpeed = moveSpeed;
             moveSpeed = frightenedModeMoveSpeed;
         }
+        if(currentMode != m)
+        {
+            previousMode = currentMode;
+            currentMode = m;
+        }
         UpdateAnimatorController();
     }
 
     public void StartFrightenedMode()
     {
+        frightenedModeTimer = 0f;
         ChangeMode(Mode.Frightened);
     }
     
