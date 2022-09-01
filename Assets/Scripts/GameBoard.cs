@@ -7,6 +7,9 @@ public class GameBoard : MonoBehaviour
     private static int boardWidth = 28;
     private static int boardHeight = 36;
 
+    public AudioClip backgroundAudioNormal;
+    public AudioClip backgroundAudioFrightened;
+
     public GameObject[,] board = new GameObject[boardWidth, boardHeight];
 
     //gather all objects into the board to use later
