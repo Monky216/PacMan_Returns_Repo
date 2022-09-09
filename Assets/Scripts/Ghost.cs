@@ -106,6 +106,37 @@ public class Ghost : MonoBehaviour
         }
     }
     
+    public void Restart()
+    {
+        transform.position = startingPosition.transform.position;
+
+        ghostReleaseTimer = 0;
+        modeChangeIteration = 1;
+        modeChangeTimer = 0;
+
+        if(transform.name != "RedGhost")
+        {
+            isInGhostHouse = true;
+        }
+
+        currentNode = startingPosition;
+
+        if (isInGhostHouse)
+        {
+            direction = Vector2.up;
+            targetNode = currentNode.neighbors[0];
+        }
+        else
+        {
+            //red ghost only
+            direction = Vector2.left;
+            targetNode = ChooseNextNode();
+        }
+
+        previousNode = currentNode;
+        UpdateAnimatorController();
+    }
+
     void Update()
     {
         ModeUpdate();
@@ -161,6 +192,7 @@ public class Ghost : MonoBehaviour
             else
             {
                 //game over
+                GameObject.Find("Game").transform.GetComponent<GameBoard>().Restart();
             }
         }
     }

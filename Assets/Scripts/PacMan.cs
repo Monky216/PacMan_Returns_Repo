@@ -14,7 +14,7 @@ public class PacMan : MonoBehaviour
     private Vector2 direction = Vector2.zero;
     private Vector2 nextDirection;
 
-    private Node currentNode, targetNode, previousNode;
+    private Node currentNode, targetNode, previousNode, startingPosition;
 
     private int pelletsConsumed = 0;
 
@@ -26,6 +26,7 @@ public class PacMan : MonoBehaviour
         audio = transform.GetComponent<AudioSource>();
         
         Node node = GetNodeAtPosition(transform.localPosition);
+        startingPosition = node;
 
         if (node != null)
         {
@@ -34,6 +35,17 @@ public class PacMan : MonoBehaviour
 
         direction = Vector2.left;
         orientation = Vector2.left;
+        ChangePosition(direction);
+    }
+
+    public void Restart()
+    {
+        //reseting Pac-Man's starting position
+        transform.position = startingPosition.transform.position;
+        currentNode = startingPosition;
+        direction = Vector2.left;
+        orientation = Vector2.left;
+        nextDirection = Vector2.left;
         ChangePosition(direction);
     }
     

@@ -28,4 +28,17 @@ public class GameBoard : MonoBehaviour
             }
         }
     }
+
+    public void Restart()
+    {
+        GameObject pacMan = GameObject.Find("PacMan");
+        pacMan.GetComponent<PacMan>().Restart();
+
+        GameObject[] o = GameObject.FindGameObjectsWithTag("Ghost");
+
+        foreach (GameObject ghost in o)
+        {
+            ghost.transform.GetComponent<Ghost>().Restart();
+        }
+    }
 }
