@@ -7,6 +7,10 @@ public class GameBoard : MonoBehaviour
     private static int boardWidth = 28;
     private static int boardHeight = 36;
 
+    public int totalPellets = 0;
+    public int score = 0;
+    public int pacManLifes = 3;
+
     public AudioClip backgroundAudioNormal;
     public AudioClip backgroundAudioFrightened;
 
@@ -31,11 +35,12 @@ public class GameBoard : MonoBehaviour
 
     public void Restart()
     {
+        pacManLifes -= 1;
+        
         GameObject pacMan = GameObject.Find("PacMan");
         pacMan.GetComponent<PacMan>().Restart();
 
         GameObject[] o = GameObject.FindGameObjectsWithTag("Ghost");
-
         foreach (GameObject ghost in o)
         {
             ghost.transform.GetComponent<Ghost>().Restart();

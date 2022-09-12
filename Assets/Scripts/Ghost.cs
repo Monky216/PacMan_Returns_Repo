@@ -112,7 +112,7 @@ public class Ghost : MonoBehaviour
 
         ghostReleaseTimer = 0;
         modeChangeIteration = 1;
-        modeChangeTimer = 0;
+        modeChangeTimer = 0f;
 
         if(transform.name != "RedGhost")
         {
@@ -187,10 +187,12 @@ public class Ghost : MonoBehaviour
         {
             if (currentMode == Mode.Frightened)
             {
+                Debug.Log("CONSUMED");
                 Consumed();
             }
-            else
+            else if (currentMode != Mode.Consumed)
             {
+                Debug.Log("GAME OVER");
                 //game over
                 GameObject.Find("Game").transform.GetComponent<GameBoard>().Restart();
             }
