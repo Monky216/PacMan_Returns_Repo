@@ -8,6 +8,11 @@ public class PacMan : MonoBehaviour
     public float speed;
     public Sprite idleSprite;
 
+    public RuntimeAnimatorController chompAnimation;
+    public RuntimeAnimatorController deathAnimation;
+
+    public bool canMove = true;
+
     public AudioClip chomp1;
     public AudioClip chomp2;
 
@@ -40,6 +45,13 @@ public class PacMan : MonoBehaviour
 
     public void Restart()
     {
+        canMove = true;
+
+        //reseting animation
+        transform.GetComponent<Animator>().runtimeAnimatorController = chompAnimation;
+        transform.GetComponent<Animator>().enabled = true;
+        transform.GetComponent<SpriteRenderer>().enabled = true;
+
         //reseting Pac-Man's starting position
         transform.position = startingPosition.transform.position;
         currentNode = startingPosition;
@@ -51,15 +63,18 @@ public class PacMan : MonoBehaviour
     
     void Update()
     {
-        //in order to use named methods, you must call them in a Unity preset method
-        CheckInput();
-        Move();
-        UpdateOrientation();
-        UpdateAnimationState();
+        if (canMove)
+        {
+            //in order to use named methods, you must call them in a Unity preset method
+            CheckInput();
+            Move();
+            UpdateOrientation();
+            UpdateAnimationState();
 
-        //two pellets do not get consumed because of script delay
-        //decrease PacMan's speed and it will work
-        ConsumePellet();
+            //two pellets do not get consumed because of script delay
+            //decrease PacMan's speed and it will work
+            ConsumePellet();
+        }
     }
 
     void PlayChompSound()

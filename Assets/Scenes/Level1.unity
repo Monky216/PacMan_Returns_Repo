@@ -8001,8 +8001,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f6e9ce314e0f24f8e5a22286e0f14c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalPellets: 0
+  score: 0
+  pacManLifes: 3
   backgroundAudioNormal: {fileID: 8300000, guid: dc9cbe54d6f0882499a545c24d1fb9bc, type: 3}
   backgroundAudioFrightened: {fileID: 8300000, guid: 955fee16ea629184ab184ccb2fe63242, type: 3}
+  backgroundAudioPacMenDeath: {fileID: 8300000, guid: 081d8f4248b63704283b327e9402e658, type: 3}
 --- !u!114 &763928556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23107,7 +23111,15 @@ PrefabInstance:
     - target: {fileID: 7560118283118190511, guid: 0d5d4540eaa072d4b8ecc64675e605df, type: 3}
       propertyPath: idleSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5621ebb06458c664188f89cf8e78cfcf, type: 3}
+      objectReference: {fileID: 21300000, guid: 6c395d6e2deaaef4dba7784221911c66, type: 3}
+    - target: {fileID: 7560118283118190511, guid: 0d5d4540eaa072d4b8ecc64675e605df, type: 3}
+      propertyPath: chompAnimation
+      value: 
+      objectReference: {fileID: 9100000, guid: 8c656a5418a6203448fa41efaed6ade1, type: 2}
+    - target: {fileID: 7560118283118190511, guid: 0d5d4540eaa072d4b8ecc64675e605df, type: 3}
+      propertyPath: deathAnimation
+      value: 
+      objectReference: {fileID: 9100000, guid: ac9b804fa6beb0f4497320d0deb9e98c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d5d4540eaa072d4b8ecc64675e605df, type: 3}
 --- !u!1001 &5215159897656055405

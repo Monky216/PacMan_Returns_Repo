@@ -10,6 +10,8 @@ public class Ghost : MonoBehaviour
     public float frightenedModeMoveSpeed = 3.2f;
     public float consumedMoveSpeed = 15f;
 
+    public bool canMove = true;
+    
     public Node startingPosition;
     public Node homeNode;
     public Node ghostHouse;
@@ -108,6 +110,16 @@ public class Ghost : MonoBehaviour
     
     public void Restart()
     {
+        //resets every ghost variable
+        canMove = true;
+
+        transform.GetComponent<SpriteRenderer>().enabled = true;
+
+        currentMode = Mode.Scatter;
+
+        moveSpeed = normalMoveSpeed;
+        previousMoveSpeed = 0;
+
         transform.position = startingPosition.transform.position;
 
         ghostReleaseTimer = 0;
@@ -139,11 +151,14 @@ public class Ghost : MonoBehaviour
 
     void Update()
     {
-        ModeUpdate();
-        Move();
-        ReleaseGhosts();
-        CheckCollision();
-        CheckIsInGhostHouse();
+        if (canMove)
+        {
+            ModeUpdate();
+            Move();
+            ReleaseGhosts();
+            CheckCollision();
+            CheckIsInGhostHouse();
+        }
     }
 
     void CheckIsInGhostHouse()
@@ -187,14 +202,12 @@ public class Ghost : MonoBehaviour
         {
             if (currentMode == Mode.Frightened)
             {
-                Debug.Log("CONSUMED");
                 Consumed();
             }
             else if (currentMode != Mode.Consumed)
             {
-                Debug.Log("GAME OVER");
                 //game over
-                GameObject.Find("Game").transform.GetComponent<GameBoard>().Restart();
+                GameObject.Find("Game").transform.GetComponent<GameBoard>().StartDeath();
             }
         }
     }
