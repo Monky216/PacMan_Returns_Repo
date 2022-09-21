@@ -7,6 +7,7 @@ TagManager:
   - Pellet
   - Ghost
   - GhostHome
+  - Text
   layers:
   - Default
   - TransparentFX

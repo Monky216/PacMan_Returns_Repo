@@ -71,8 +71,9 @@ public class PacMan : MonoBehaviour
             UpdateOrientation();
             UpdateAnimationState();
 
-            //two pellets do not get consumed because of script delay
+            //one pellet does not get consumed because of script delay
             //decrease PacMan's speed and it will work
+            //hopefully with title scene, it'll have enough time to load properly
             ConsumePellet();
         }
     }
@@ -116,7 +117,7 @@ public class PacMan : MonoBehaviour
 
     void ChangePosition(Vector2 d)
     {
-        //check if the node selected is an option
+        //checks if you did not click the same direction again
         if (d != direction)
         {
             nextDirection = d;
@@ -292,10 +293,19 @@ public class PacMan : MonoBehaviour
 
         for (int i = 0; i < currentNode.neighbors.Length; i++)
         {
+            //validDirection array is the direction you plan on going
             if (currentNode.validDirections [i] == d)
             {
                 moveToNode = currentNode.neighbors[i];
-                break;
+                //prevents Pac-Man from entering the ghost house
+                if(moveToNode.transform.GetComponent<Tile>().isGhostHouse == true)
+                {
+                    moveToNode = null;
+                }
+                else
+                {
+                    break;
+                }
             }
         }
         return moveToNode;

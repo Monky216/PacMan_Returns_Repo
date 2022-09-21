@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameBoard : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class GameBoard : MonoBehaviour
     public AudioClip backgroundAudioFrightened;
     public AudioClip backgroundAudioPacMenDeath;
 
+    public Text playerText;
+    public Text readyText;
+
     public GameObject[,] board = new GameObject[boardWidth, boardHeight];
 
     //gather all objects into the board to use later
@@ -29,7 +33,7 @@ public class GameBoard : MonoBehaviour
         {
             Vector2 pos = o.transform.position;
 
-            if (o.name != "PacMan" && o.tag != "Pellet" && o.tag != "Ghost" && o.tag != "GhostHome")
+            if (o.name != "PacMan" && o.tag != "Pellet" && o.tag != "Ghost" && o.tag != "GhostHome" && o.name != "Canvas" && o.tag != "Text")
             {
                 board[(int)pos.x, (int)pos.y] = o;
             }
@@ -131,6 +135,6 @@ public class GameBoard : MonoBehaviour
         transform.GetComponent<AudioSource>().clip = backgroundAudioNormal;
         transform.GetComponent<AudioSource>().Play();
 
-        didStartDeath = true;
+        didStartDeath = false;
     }
 }

@@ -85,7 +85,9 @@ public class Ghost : MonoBehaviour
 
     void Start()
     {
+        //why is the audio here?
         backgroundAudio = GameObject.Find("Game").transform.GetComponent<AudioSource>();
+
         pacMan = GameObject.FindGameObjectWithTag("Player");
         Node node = GetNodeAtPosition(transform.localPosition);
         if (node != null)
@@ -203,11 +205,13 @@ public class Ghost : MonoBehaviour
             if (currentMode == Mode.Frightened)
             {
                 Consumed();
+                Debug.Log("CONSUMED");
             }
             else if (currentMode != Mode.Consumed)
             {
                 //game over
                 GameObject.Find("Game").transform.GetComponent<GameBoard>().StartDeath();
+                Debug.Log("GAME OVER");
             }
         }
     }
@@ -593,6 +597,7 @@ public class Ghost : MonoBehaviour
 
         for (int i = 0; i < currentNode.neighbors.Length; i++)
         {
+            //aka not backwards
             if (currentNode.validDirections [i] != direction * -1)
             {
                 if (currentMode != Mode.Consumed)
@@ -600,7 +605,7 @@ public class Ghost : MonoBehaviour
                     GameObject tile = GetTileAtPosition(currentNode.transform.position);
                     if (tile.transform.GetComponent<Tile>().isGhostHouseEnterance == true)
                     {
-                        //found a ghost house, don't want to allow movement
+                        //else found a ghost house, don't want to allow movement
                         if (currentNode.validDirections [i] != Vector2.down)
                         {
                             foundNodes[nodeCounter] = currentNode.neighbors[i];
